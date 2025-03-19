@@ -1,19 +1,27 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-type DigitoProps = {
-  bloco: string;
-  onPress: VoidFunction;
-  numero1: string;
-  numero2: string;
+export type BlocoDeValores = {
+  numeroBloco: number;
+  valores: {
+    valor1: number;
+    valor2: number;
+  };
 };
 
-export default function DigitoComponent(props: DigitoProps) {
+export type DigitoProps = {
+  bloco: BlocoDeValores;
+  onPress: VoidFunction;
+};
+
+export function DigitoComponent(props: DigitoProps) {
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
-      <Text style={styles.buttonTextHeader}>Bloco {props.bloco}</Text>
+      <Text style={styles.buttonTextHeader}>
+        Bloco {props.bloco.numeroBloco}
+      </Text>
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{props.numero1}</Text>
-        <Text style={styles.buttonText}>{props.numero2}</Text>
+        <Text style={styles.buttonText}>{props.bloco.valores.valor1}</Text>
+        <Text style={styles.buttonText}>{props.bloco.valores.valor2}</Text>
       </View>
     </TouchableOpacity>
   );
