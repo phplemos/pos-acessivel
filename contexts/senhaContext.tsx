@@ -1,39 +1,45 @@
-import React, { createContext, useState } from 'react';
+import { getRandomInt } from "@/utils/randomInteger";
+import React, { createContext, useState } from "react";
 
 interface PasswordContextType {
-    digito1: string;
-    digito2: string;
-    digito3: string;
-    digito4: string;
+  digito1: string;
+  digito2: string;
+  digito3: string;
+  digito4: string;
+  randomNumber1: string;
+  randomNumber2: string;
 }
 
 const PasswordContext = createContext<PasswordContextType>({
-    digito1: "",
-    digito2: "",
-    digito3: "",
-    digito4: ""
+  digito1: "",
+  digito2: "",
+  digito3: "",
+  digito4: "",
+  randomNumber1: "",
+  randomNumber2: "",
 });
 
 interface PasswordProviderProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const PasswordProvider: React.FC<PasswordProviderProps> = ({children}) => {
-    const [password, setPassword] = useState<PasswordContextType>({
-        digito1: "2",
-        digito2: "3",
-        digito3: "4",
-        digito4: "5"
-    });
-    
-    const contextValue: PasswordContextType = password;
+const PasswordProvider: React.FC<PasswordProviderProps> = ({ children }) => {
+  const [password, setPassword] = useState<PasswordContextType>({
+    digito1: "2",
+    digito2: "3",
+    digito3: "4",
+    digito4: "5",
+    randomNumber1: "",
+    randomNumber2: "",
+  });
 
-    return (
-        <PasswordContext.Provider value={contextValue}>
-            {children}
-        </PasswordContext.Provider>);    
+  const contextValue: PasswordContextType = password;
 
+  return (
+    <PasswordContext.Provider value={contextValue}>
+      {children}
+    </PasswordContext.Provider>
+  );
 };
 
-
-export {PasswordContext, PasswordContextType,PasswordProvider};
+export { PasswordContext, PasswordContextType, PasswordProvider };

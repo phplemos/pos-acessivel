@@ -8,33 +8,50 @@ import { useContext, useEffect, useState } from "react";
 import { getRandomInt } from "@/utils/randomInteger";
 import { PasswordContext } from "@/contexts/senhaContext";
 import { router } from "expo-router";
+import { speak } from "expo-speech";
 
 export default function Etapa1() {
-  const valor1 = getRandomInt(0, 9),
-    valor2 = getRandomInt(0, 9);
   const context = useContext(PasswordContext);
+
+  useEffect(() => {
+    context.randomNumber1 = getRandomInt(0, 9).toString();
+    context.randomNumber2 = getRandomInt(0, 9).toString();
+    if (
+      context.digito1 == context.randomNumber1 ||
+      context.digito1 == context.randomNumber2
+    ) {
+      context.randomNumber1 = getRandomInt(0, 9).toString();
+      context.randomNumber2 = getRandomInt(0, 9).toString();
+    }
+  }, []);
+
   const [blocoAtual, setBlocoAtual] = useState<BlocoDeValores>({
     numeroBloco: 1,
     valores: {
-      valor1: valor1,
-      valor2: Number.parseInt(context.digito1),
+      valor1: context.digito1,
+      valor2: context.randomNumber1,
     },
   });
-
+  useEffect(() => {
+    speak(
+      `Bloco ${blocoAtual.numeroBloco}, Numero: ${blocoAtual.valores.valor1} ou ${blocoAtual.valores.valor2}`,
+      { language: "pt-br" }
+    );
+  }, [blocoAtual]);
   function proximoBloco() {
     const blocos = [
       {
         numeroBloco: 1,
         valores: {
-          valor1: valor1,
-          valor2: Number.parseInt(context.digito1),
+          valor1: context.randomNumber1,
+          valor2: context.digito1,
         },
       },
       {
         numeroBloco: 2,
         valores: {
-          valor1: Number.parseInt(context.digito1),
-          valor2: valor2,
+          valor1: context.digito1,
+          valor2: context.randomNumber2,
         },
       },
     ];
@@ -55,7 +72,7 @@ export default function Etapa1() {
           <BrandingComponent />
         </View>
         <DescricaoComponent
-          titulo="Digito"
+          titulo="Dígito"
           tituloDestaque="1 de 4"
           descricao="Selecione o bloco que contém o 1º dígito da sua senha"
         />

@@ -1,3 +1,5 @@
+import { speak } from "expo-speech";
+import { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 type DescricaoProps = {
@@ -7,6 +9,12 @@ type DescricaoProps = {
 };
 
 export default function DescricaoComponent(props: DescricaoProps) {
+  useEffect(() => {
+      speak(
+        `Titulo: ${props.titulo} ${props.tituloDestaque}, Descricao: ${props.descricao}`,
+        { language: "pt-br" }
+      );
+    }, []);
   return (
     <View style={styles.content}>
       <Text style={styles.title}>

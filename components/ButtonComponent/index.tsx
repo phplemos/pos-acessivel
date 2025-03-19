@@ -1,3 +1,5 @@
+import { speak } from "expo-speech";
+import { useEffect } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 type ButtonProps = {
@@ -6,10 +8,13 @@ type ButtonProps = {
 };
 
 export default function ButtonComponent(props: ButtonProps) {
+  useEffect(() => {
+    speak(`Botão: ${props.texto}`, { language: "pt-BR" });
+  }, []);
   return (
     <View>
       <TouchableOpacity style={styles.button} onPress={props.onPress}>
-        <Text style={styles.buttonText}>Iniciar pagamento</Text>
+        <Text style={styles.buttonText}>{props.texto}</Text>
       </TouchableOpacity>
     </View>
   );

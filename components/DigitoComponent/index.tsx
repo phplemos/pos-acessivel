@@ -1,10 +1,12 @@
+import { speak } from "expo-speech";
+import { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export type BlocoDeValores = {
   numeroBloco: number;
   valores: {
-    valor1: number;
-    valor2: number;
+    valor1: string;
+    valor2: string;
   };
 };
 
@@ -14,6 +16,8 @@ export type DigitoProps = {
 };
 
 export function DigitoComponent(props: DigitoProps) {
+  
+
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <Text style={styles.buttonTextHeader}>
