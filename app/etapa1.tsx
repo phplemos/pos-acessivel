@@ -35,7 +35,7 @@ export default function Etapa1() {
   useEffect(() => {
     speak(
       `Bloco ${blocoAtual.numeroBloco}, Numero: ${blocoAtual.valores.valor1} ou ${blocoAtual.valores.valor2}`,
-      { language: "pt-br" }
+      { language: "pt-br"}
     );
   }, [blocoAtual]);
   function proximoBloco() {
@@ -50,7 +50,7 @@ export default function Etapa1() {
       {
         numeroBloco: 2,
         valores: {
-          valor1: context.digito1,
+          valor1: context.randomNumber1,
           valor2: context.randomNumber2,
         },
       },

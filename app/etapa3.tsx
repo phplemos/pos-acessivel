@@ -39,7 +39,7 @@ export default function Etapa3() {
         numeroBloco: 1,
         valores: {
           valor1: context.randomNumber1,
-          valor2: context.digito3,
+          valor2: context.randomNumber2,
         },
       },
       {
@@ -75,7 +75,7 @@ export default function Etapa3() {
         <DescricaoComponent
           titulo="Dígito"
           tituloDestaque="3 de 4"
-          descricao="Selecione o bloco que contém o 1º dígito da sua senha"
+          descricao="Selecione o bloco que contém o 3º dígito da sua senha"
         />
         <View style={styles.selectNumber}>
           <TouchableOpacity onPress={proximoBloco}>

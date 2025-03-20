@@ -12,7 +12,7 @@ export default function DescricaoComponent(props: DescricaoProps) {
   useEffect(() => {
       speak(
         `Titulo: ${props.titulo} ${props.tituloDestaque}, Descricao: ${props.descricao}`,
-        { language: "pt-br" }
+        { language: "pt-br", rate:1.5, pitch:0.9  }
       );
     }, []);
   return (
