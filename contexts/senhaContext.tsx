@@ -8,6 +8,8 @@ interface PasswordContextType {
   digito4: string;
   randomNumber1: string;
   randomNumber2: string;
+  randomNumber3: string;
+
 }
 
 const PasswordContext = createContext<PasswordContextType>({
@@ -17,7 +19,9 @@ const PasswordContext = createContext<PasswordContextType>({
   digito4: "",
   randomNumber1: "",
   randomNumber2: "",
+  randomNumber3: "",
 });
+
 
 interface PasswordProviderProps {
   children: React.ReactNode;
@@ -31,6 +35,7 @@ const PasswordProvider: React.FC<PasswordProviderProps> = ({ children }) => {
     digito4: "5",
     randomNumber1: "",
     randomNumber2: "",
+    randomNumber3: "",
   });
 
   const contextValue: PasswordContextType = password;

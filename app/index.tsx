@@ -4,11 +4,35 @@ import BrandingComponent from "@/components/BrandingComponent";
 import DescricaoComponent from "@/components/DescricaoComponent";
 import ButtonComponent from "@/components/ButtonComponent";
 import { router } from "expo-router";
-import * as Speech from "expo-speech";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { PasswordContext } from "@/contexts/senhaContext";
+import { getRandomInt } from "@/utils/randomInteger";
 
 export default function Home() {
+  const context = useContext(PasswordContext);
+
   const iniciarPagamento = () => {
+    context.randomNumber1 = getRandomInt(0, 9).toString();
+    context.randomNumber2 = getRandomInt(0, 9).toString();
+    context.randomNumber3 = getRandomInt(0, 9).toString();
+    while (
+      context.randomNumber1 == context.digito1 ||
+      context.randomNumber2 == context.digito1 ||
+      context.randomNumber3 == context.digito1
+    ) {
+      if (context.randomNumber1 == context.digito1) {
+        context.randomNumber1 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber2 == context.digito1) {
+        context.randomNumber2 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber3 == context.digito1) {
+        context.randomNumber3 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber2 == context.randomNumber3) {
+        context.randomNumber3 = getRandomInt(0, 9).toString();
+      }
+    }
     router.navigate("/etapa1");
   };
 

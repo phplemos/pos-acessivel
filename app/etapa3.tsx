@@ -28,8 +28,8 @@ export default function Etapa3() {
   const [blocoAtual, setBlocoAtual] = useState<BlocoDeValores>({
     numeroBloco: 1,
     valores: {
-      valor1: context.digito3,
-      valor2: context.randomNumber1,
+      valor1: context.randomNumber1,
+      valor2: context.digito3,
     },
   });
 
@@ -39,13 +39,13 @@ export default function Etapa3() {
         numeroBloco: 1,
         valores: {
           valor1: context.randomNumber1,
-          valor2: context.randomNumber2,
+          valor2: context.digito3,
         },
       },
       {
         numeroBloco: 2,
         valores: {
-          valor1: context.digito3,
+          valor1: context.randomNumber3,
           valor2: context.randomNumber2,
         },
       },
@@ -56,14 +56,29 @@ export default function Etapa3() {
       setBlocoAtual(blocos[1]);
     }
   }
-  useEffect(() => {
-      speak(
-        `Bloco ${blocoAtual.numeroBloco}, Numero: ${blocoAtual.valores.valor1} ou ${blocoAtual.valores.valor2}`,
-        { language: "pt-br" }
-      );
-    }, [blocoAtual]);
 
   function proximoDigito() {
+    context.randomNumber1 = getRandomInt(0, 9).toString();
+    context.randomNumber2 = getRandomInt(0, 9).toString();
+    context.randomNumber3 = getRandomInt(0, 9).toString();
+    while (
+      context.randomNumber1 == context.digito4 ||
+      context.randomNumber2 == context.digito4 ||
+      context.randomNumber3 == context.digito4
+    ) {
+      if (context.randomNumber1 == context.digito4) {
+        context.randomNumber1 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber2 == context.digito4) {
+        context.randomNumber2 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber3 == context.digito4) {
+        context.randomNumber3 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber2 == context.randomNumber3) {
+        context.randomNumber3 = getRandomInt(0, 9).toString();
+      }
+    }
     router.navigate("/etapa4");
   }
   return (

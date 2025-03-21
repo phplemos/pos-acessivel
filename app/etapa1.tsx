@@ -12,32 +12,14 @@ import { speak } from "expo-speech";
 
 export default function Etapa1() {
   const context = useContext(PasswordContext);
-
-  useEffect(() => {
-    context.randomNumber1 = getRandomInt(0, 9).toString();
-    context.randomNumber2 = getRandomInt(0, 9).toString();
-    if (
-      context.digito1 == context.randomNumber1 ||
-      context.digito1 == context.randomNumber2
-    ) {
-      context.randomNumber1 = getRandomInt(0, 9).toString();
-      context.randomNumber2 = getRandomInt(0, 9).toString();
-    }
-  }, []);
-
   const [blocoAtual, setBlocoAtual] = useState<BlocoDeValores>({
     numeroBloco: 1,
     valores: {
-      valor1: context.digito1,
-      valor2: context.randomNumber1,
+      valor1: context.randomNumber1,
+      valor2: context.digito1,
     },
   });
-  useEffect(() => {
-    speak(
-      `Bloco ${blocoAtual.numeroBloco}, Numero: ${blocoAtual.valores.valor1} ou ${blocoAtual.valores.valor2}`,
-      { language: "pt-br"}
-    );
-  }, [blocoAtual]);
+
   function proximoBloco() {
     const blocos = [
       {
@@ -50,7 +32,7 @@ export default function Etapa1() {
       {
         numeroBloco: 2,
         valores: {
-          valor1: context.randomNumber1,
+          valor1: context.randomNumber3,
           valor2: context.randomNumber2,
         },
       },
@@ -63,6 +45,28 @@ export default function Etapa1() {
   }
 
   function proximoDigito() {
+    context.randomNumber1 = getRandomInt(0, 9).toString();
+    context.randomNumber2 = getRandomInt(0, 9).toString();
+    context.randomNumber3 = getRandomInt(0, 9).toString();
+    while (
+      context.randomNumber1 == context.digito2 ||
+      context.randomNumber2 == context.digito2 ||
+      context.randomNumber3 == context.digito2
+    ) {
+      if (context.randomNumber1 == context.digito2) {
+        context.randomNumber1 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber2 == context.digito2) {
+        context.randomNumber2 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber3 == context.digito2) {
+        context.randomNumber3 = getRandomInt(0, 9).toString();
+      }
+      if (context.randomNumber2 == context.randomNumber3) {
+        context.randomNumber3 = getRandomInt(0, 9).toString();
+      }
+    }
+
     router.navigate("/etapa2");
   }
   return (

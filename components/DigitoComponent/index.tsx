@@ -16,7 +16,12 @@ export type DigitoProps = {
 };
 
 export function DigitoComponent(props: DigitoProps) {
-  
+  useEffect(() => {
+    speak(
+      `Bloco ${props.bloco.numeroBloco}, Numero: ${props.bloco.valores.valor1} ou ${props.bloco.valores.valor2}`,
+      { language: "pt-br" }
+    );
+  }, [props.bloco]);
 
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
